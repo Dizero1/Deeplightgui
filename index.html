@@ -16,9 +16,9 @@
       <span class="brand-name">DeepLight</span>
     </div>
     <nav class="navbar-tabs">
-      <button class="tab-btn active" data-tab="restore">Upload &amp; Restore</button>
-      <button class="tab-btn" data-tab="comparison">Comparison Screen</button>
-      <button class="tab-btn" data-tab="detection">Detection Screen</button>
+      <button class="tab-btn active" data-tab="restore">Restore</button>
+      <button class="tab-btn" data-tab="comparison">Compare</button>
+      <button class="tab-btn" data-tab="detection">Detect</button>
     </nav>
   </header>
 
@@ -28,8 +28,8 @@
     <!-- PAGE 1: Upload & Restore -->
     <section class="page active" id="page-restore">
       <div class="page-header">
-        <h1 class="page-title">Upload &amp; Restore</h1>
-        <p class="page-desc">Upload a degraded image and apply deep restoration to enhance quality.</p>
+        <h1 class="page-title">Restoration</h1>
+        <p class="page-desc">Upload a lowlight image and apply deep restoration to enhance quality.</p>
       </div>
 
       <div class="image-area two-col">
@@ -112,7 +112,7 @@
     <!-- PAGE 2: Comparison Screen -->
     <section class="page" id="page-comparison">
       <div class="page-header">
-        <h1 class="page-title">Comparison Screen</h1>
+        <h1 class="page-title">Model Comparison</h1>
         <p class="page-desc">Compare restoration outputs across multiple models side by side.</p>
       </div>
 
@@ -168,7 +168,7 @@
       <!-- Control Bar -->
       <div class="control-bar">
         <div class="control-left">
-          <label class="control-label">Model Set Select(Disable)</label>
+          <label class="control-label">All Model</label>
         </div>
         <div class="control-right">
           <input type="file" id="comp-file-input" accept="image/*" class="hidden" />
@@ -204,7 +204,7 @@
     <!-- PAGE 3: Detection Screen -->
     <section class="page" id="page-detection">
       <div class="page-header">
-        <h1 class="page-title">Downstream YOLOv8 Evaluation</h1>
+        <h1 class="page-title">Downstream YOLOv8 Evaluation(Demo only)</h1>
         <p class="page-desc">Upload an image and run object detection. Results are rendered server-side.</p>
       </div>
 

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DeepLight</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ===== TOP NAV ===== -->
+  <header class="navbar">
+    <div class="navbar-brand">
+      <span class="brand-name">DeepLight</span>
+    </div>
+    <nav class="navbar-tabs">
+      <button class="tab-btn active" data-tab="restore">Upload &amp; Restore</button>
+      <button class="tab-btn" data-tab="comparison">Comparison Screen</button>
+      <button class="tab-btn" data-tab="detection">Detection Screen</button>
+    </nav>
+  </header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="main-content">
+
+    <!-- PAGE 1: Upload & Restore -->
+    <section class="page active" id="page-restore">
+      <div class="page-header">
+        <h1 class="page-title">Upload &amp; Restore</h1>
+        <p class="page-desc">Upload a degraded image and apply deep restoration to enhance quality.</p>
+      </div>
+
+      <div class="image-area two-col">
+        <!-- Input -->
+        <div class="image-panel">
+          <div class="panel-label">Input Image</div>
+          <div class="image-box dropzone" id="restore-input-box" data-dropzone="restore">
+            <div class="placeholder" id="restore-input-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round" />
+                <polyline points="17 8 12 3 7 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+                <line x1="12" y1="3" x2="12" y2="15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+              </svg>
+              <span>Upload an image to begin</span>
+            </div>
+            <img id="restore-input-img" class="preview-img hidden" alt="Input" />
+          </div>
+        </div>
+        <!-- Output -->
+        <div class="image-panel">
+          <div class="panel-label">Output Image</div>
+          <div class="image-box" id="restore-output-box">
+            <div class="placeholder" id="restore-output-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5" />
+                <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="1.5" />
+                <path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              <span>Restored image will appear here</span>
+            </div>
+            <img id="restore-output-img" class="preview-img hidden" alt="Output" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Control Bar -->
+      <div class="control-bar">
+        <div class="control-left">
+          <label class="control-label">Model</label>
+          <select class="select-input" id="restore-model">
+            <option value="AirNet">AirNet</option>
+            <option value="PromptIR">PromptIR</option>
+            <option value="Modified PromptIR">Modified PromptIR (Ours)</option>
+          </select>
+        </div>
+        <div class="control-right">
+          <input type="file" id="restore-file-input" accept="image/*" class="hidden" />
+          <button class="btn btn-secondary" id="restore-upload-btn">
+            <svg viewBox="0 0 16 16" fill="currentColor">
+              <path
+                d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
+              <path d="M4.5 15a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7z" />
+            </svg>
+            Upload
+          </button>
+          <button class="btn btn-primary" id="restore-action-btn" disabled>
+            <svg viewBox="0 0 16 16" fill="currentColor">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+              <path
+                d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z" />
+            </svg>
+            Restore
+          </button>
+          <button class="btn btn-ghost" id="restore-download-btn" disabled>
+            <svg viewBox="0 0 16 16" fill="currentColor">
+              <path
+                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+              <path
+                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+            </svg>
+            Download
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 2: Comparison Screen -->
+    <section class="page" id="page-comparison">
+      <div class="page-header">
+        <h1 class="page-title">Comparison Screen</h1>
+        <p class="page-desc">Compare restoration outputs across multiple models side by side.</p>
+      </div>
+
+      <div class="image-area four-col">
+        <div class="image-panel">
+          <div class="panel-label">Input Image</div>
+          <div class="image-box dropzone" data-dropzone="comp">
+            <div class="placeholder" id="comp-input-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round" />
+                <polyline points="17 8 12 3 7 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+                <line x1="12" y1="3" x2="12" y2="15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+              </svg>
+              <span>Upload image</span>
+            </div>
+            <img id="comp-input-img" class="preview-img hidden" alt="Input" />
+          </div>
+        </div>
+        <div class="image-panel">
+          <div class="panel-label">AirNet</div>
+          <div class="image-box">
+            <div class="placeholder" id="comp-a-placeholder">
+              <span class="model-badge">A</span>
+              <span>Awaiting result</span>
+            </div>
+            <img id="comp-a-img" class="preview-img hidden" alt="Model A" />
+          </div>
+        </div>
+        <div class="image-panel">
+          <div class="panel-label">PromptIR</div>
+          <div class="image-box">
+            <div class="placeholder" id="comp-b-placeholder">
+              <span class="model-badge">B</span>
+              <span>Awaiting result</span>
+            </div>
+            <img id="comp-b-img" class="preview-img hidden" alt="Model B" />
+          </div>
+        </div>
+        <div class="image-panel">
+          <div class="panel-label">Modified PromptIR (Ours)</div>
+          <div class="image-box">
+            <div class="placeholder" id="comp-c-placeholder">
+              <span class="model-badge">C</span>
+              <span>Awaiting result</span>
+            </div>
+            <img id="comp-c-img" class="preview-img hidden" alt="Model C" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Control Bar -->
+      <div class="control-bar">
+        <div class="control-left">
+          <label class="control-label">Model Set Select(Disable)</label>
+        </div>
+        <div class="control-right">
+          <input type="file" id="comp-file-input" accept="image/*" class="hidden" />
+          <button class="btn btn-secondary" id="comp-upload-btn">
+            <svg viewBox="0 0 16 16" fill="currentColor">
+              <path
+                d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
+              <path d="M4.5 15a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7z" />
+            </svg>
+            Upload
+          </button>
+          <button class="btn btn-primary" id="comp-action-btn" disabled>
+            <svg viewBox="0 0 16 16" fill="currentColor">
+              <path d="M1 12s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+              <path fill-rule="evenodd"
+                d="M13.5 5a.5.5 0 0 1 .5.5v2h2a.5.5 0 0 1 0 1h-2v2a.5.5 0 0 1-1 0v-2h-2a.5.5 0 0 1 0-1h2v-2a.5.5 0 0 1 .5-.5z" />
+            </svg>
+            Compare
+          </button>
+          <button class="btn btn-ghost" id="comp-download-btn" disabled>
+            <svg viewBox="0 0 16 16" fill="currentColor">
+              <path
+                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+              <path
+                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+            </svg>
+            Download
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 3: Detection Screen -->
+    <section class="page" id="page-detection">
+      <div class="page-header">
+        <h1 class="page-title">Downstream YOLOv8 Evaluation</h1>
+        <p class="page-desc">Upload an image and run object detection. Results are rendered server-side.</p>
+      </div>
+
+      <div class="image-area three-col">
+        <div class="image-panel">
+          <div class="panel-label">Input Image</div>
+          <div class="image-box dropzone" data-dropzone="det">
+            <div class="placeholder" id="det-input-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round" />
+                <polyline points="17 8 12 3 7 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+                <line x1="12" y1="3" x2="12" y2="15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+              </svg>
+              <span>Upload an image to detect</span>
+            </div>
+            <img id="det-input-img" class="preview-img hidden" alt="Input" />
+          </div>
+        </div>
+        <div class="image-panel">
+          <div class="panel-label">Custom Model Output</div>
+          <div class="image-box">
+            <div class="placeholder" id="det-custom-placeholder">
+              <span class="model-badge">C</span>
+              <span>Custom model output</span>
+            </div>
+            <img id="det-custom-img" class="preview-img hidden" alt="Custom Model Output" />
+          </div>
+        </div>
+        <div class="image-panel">
+          <div class="panel-label">YOLOv8 Output</div>
+          <div class="image-box">
+            <div class="placeholder" id="det-yolo-placeholder">
+              <span class="model-badge">Y</span>
+              <span>YOLOv8 result</span>
+            </div>
+            <img id="det-yolo-img" class="preview-img hidden" alt="YOLOv8 Output" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Control Bar -->
+      <div class="control-bar">
+        <div class="control-left">
+          <label class="control-label">Model</label>
+          <select class="select-input" id="det-model">
+            <option value="AirNet">AirNet</option>
+            <option value="PromptIR">PromptIR</option>
+            <option value="Modified PromptIR">Modified PromptIR (Ours)</option>
+          </select>
+        </div>
+        <div class="control-right">
+          <input type="file" id="det-file-input" accept="image/*" class="hidden" />
+          <button class="btn btn-secondary" id="det-upload-btn">
+            <svg viewBox="0 0 16 16" fill="currentColor">
+              <path
+                d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
+              <path d="M4.5 15a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7z" />
+            </svg>
+            Upload
+          </button>
+          <button class="btn btn-primary" id="det-action-btn" disabled>
+            <svg viewBox="0 0 16 16" fill="currentColor">
+              <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+              <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+            </svg>
+            Detect
+          </button>
+          <button class="btn btn-ghost" id="det-download-btn" disabled>
+            <svg viewBox="0 0 16 16" fill="currentColor">
+              <path
+                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+              <path
+                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+            </svg>
+            Download
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
